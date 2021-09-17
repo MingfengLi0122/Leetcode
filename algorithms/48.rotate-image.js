@@ -11,7 +11,11 @@
       }
   }
   
-  for (let row of matrix) {
-      row.reverse();
+  for (let r = 0; r < matrix.length; r++) {
+      for (let c = 0; c < matrix[0].length / 2; c++) {
+          let temp = matrix[r][c];
+          matrix[r][c] = matrix[r][matrix[0].length - c - 1];
+          matrix[r][matrix[0].length - c - 1] = temp;
+      }
   }
 };
