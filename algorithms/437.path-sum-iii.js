@@ -11,21 +11,22 @@
  * @param {number} targetSum
  * @return {number}
  */
-var pathSum = function (root, targetSum) {
+ var pathSum = function(root, targetSum) {
   if (root === null) return 0;
-
-  return pathSum(root.left, targetSum) + pathSum(root.right, targetSum) + pathSum2(root, targetSum);
+  
+  return pathSum(root.left, targetSum) + pathSum(root.right, targetSum) + pathSum2(root, targetSum)
 };
 
-const pathSum2 = function (node, targetSum) {
+const pathSum2 = function(node, targetSum) {
   if (node === null) return 0;
-
+  
   let count = 0;
-
-  if (node.val === targetSum) count = 1;
-
+  
+  const self = node.val === targetSum ? 1 : 0;
+  
   let newSum = targetSum - node.val;
   count += pathSum2(node.left, newSum);
   count += pathSum2(node.right, newSum);
-  return count;
+  
+  return count + self;
 }
