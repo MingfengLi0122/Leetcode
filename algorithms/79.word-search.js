@@ -1,17 +1,35 @@
 /**
- * @param {number} n
- * @return {number}
+ * @param {character[][]} board
+ * @param {string} word
+ * @return {boolean}
  */
- var numTrees = function(n) {
-  const G = new Array(n + 1).fill(0);
-  
-  G[0] = 1;
-  G[1] = 1;
-  
-  for (let i = 2; i <= n; i++) {
-      for (let j = 1; j <= i; j++) {
-          G[i] += G[j - 1] * G[i - j];
-      }
-  }
-  return G[n];
+
+const isOutOfBound = (board, row, col) => row < 0 || row >= board.length || col < 0 || col >= board[0].length;
+
+function existHelper(board, word, row, col) {
+    if (!word.length) return true;
+    if (isOutOfBound(board, row, col) || board[row][col] !== word[0]) return false;
+
+    const curChar = board[row][col];
+    const newWord = word.substr(1);
+
+    board[row][col] = 0;
+
+    const results = existHelper(board, newWord, row + 1, col) ||
+        existHelper(board, newWord, row - 1, col) ||
+        existHelper(board, newWord, row, col + 1) ||
+        existHelper(board, newWord, row, col - 1)
+
+    board[row][col] = curChar;
+
+    return results;
+}
+
+var exist = function (board, word) {
+    for (let row = 0; row < board.length; row++) {
+        for (let col = 0; col < board[0].length; col++) {
+            if (existHelper(board, word, row, col)) return true;
+        }
+    }
+    return false;
 };
