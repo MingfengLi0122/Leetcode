@@ -3,20 +3,21 @@
  * @return {number}
  */
 
-symbols = {
-  "I": 1,
-  "V": 5,
-  "X": 10,
-  "L": 50,
-  "C": 100,
-  "D": 500,
-  "M": 1000
-};
+ const symbol = {
+  'I' : 1,
+  'V' : 5,
+  'X' : 10,
+  'L' : 50,
+  'C' : 100,
+  'D' : 500,
+  'M' : 1000
+}
 
 var romanToInt = function(s) {
-  value = 0;
-  for(let i = 0; i < s.length; i+=1){
-      symbols[s[i]] < symbols[s[i+1]] ? value -= symbols[s[i]]: value += symbols[s[i]]
+  let val = 0;
+  for (let i = 0; i < s.length; i++) {
+      symbol[s[i]] < symbol[s[i + 1]] ? val -= symbol[s[i]] : val += symbol[s[i]];
   }
-  return value
+  
+  return val;
 };
