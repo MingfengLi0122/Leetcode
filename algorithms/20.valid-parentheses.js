@@ -1,23 +1,23 @@
-var isValid = function(s) {
-  const stack = [];
-  
-  for(let i = 0; i < s.length; i++) {
-    let c = s.charAt(i);
-    switch(c) {
-        case '(': 
-            stack.push(')');
-            break;
-        case '[': 
-            stack.push(']');
-            break;
-        case '{': 
-            stack.push('}');
-            break;
-        default:
-            if (c !== stack.pop()) {
-                return false;
-            }
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+ var isValid = function(s) {
+    const stack = [];
+    
+    for (let i = 0; i < s.length; i++) {
+        let char = s.charAt(i);
+        
+        switch (char) {
+            case '(': stack.push(')');
+                break;
+            case '[': stack.push(']');
+                break;
+            case '{': stach.push('}');
+                break;
+            default:
+                if (char !== stack.pop()) return false;
+        } 
     }
-}
- return stack.length === 0;
+    return stack.length === 0;
 };
