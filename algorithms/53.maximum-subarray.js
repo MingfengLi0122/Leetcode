@@ -11,5 +11,6 @@
       max = Math.max(max, current);
       current = Math.max(current, 0);
   }
+  
   return max;
 };
