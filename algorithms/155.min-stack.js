@@ -1,9 +1,7 @@
-/**
- * initialize your data structure here.
- */
- var MinStack = function() {
+
+var MinStack = function() {
+  this.stack = [];
   this.minStack = [];
-  this.container = [];
 };
 
 /** 
@@ -11,23 +9,32 @@
 * @return {void}
 */
 MinStack.prototype.push = function(val) {
-  this.container.push(val);
-  if (this.minStack.length === 0 || val <= this.minStack[this.minStack.length - 1]) this.minStack.push(val);
+  if (!this.stack.length) {
+      this.stack.push(val);
+      this.minStack.push(val);
+  } else {
+      this.stack.push(val);
+      this.minStack.push(Math.min(this.minStack[this.minStack.length - 1], val));
+  }
 };
 
 /**
 * @return {void}
 */
 MinStack.prototype.pop = function() {
-  const val = this.container.pop();
-  if (val === this.minStack[this.minStack.length - 1]) this.minStack.pop();
+  if (!this.stack.length) {
+      return null;
+  } else {
+      this.minStack.pop();
+      return this.stack.pop();
+  }
 };
 
 /**
 * @return {number}
 */
 MinStack.prototype.top = function() {
-  return this.container[this.container.length - 1];
+  return this.stack[this.stack.length - 1];
 };
 
 /**
