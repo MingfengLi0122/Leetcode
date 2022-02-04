@@ -17,10 +17,11 @@ return Array.from(set)[0];
  * @return {number}
  */
  var singleNumber = function(nums) {
-  let num = 0;
-  for (let n of nums) {
-      // XOR
-      num ^= n;
+  let result = 0;
+  
+  for (let i = 0; i < nums.length; i++) {
+      result ^= nums[i];
   }
-  return num;
+  
+  return result;
 };
