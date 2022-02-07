@@ -11,44 +11,44 @@
  * @return {TreeNode}
  */
 // recursion from bottom to up
- var invertTree = function(root) {
+var invertTree = function (root) {
   if (root === null) return null;
-  
+
   let left = invertTree(root.left);
   let right = invertTree(root.right);
-  
+
   root.right = left;
   root.left = right;
-  
+
   return root;
 }
 
 // DFS
-var invertTree = function(root) {
+var invertTree = function (root) {
   const stack = [root];
-  
+
   while (stack.length) {
-      const n = stack.pop();
-      if (n !== null) {
-          let temp = n.left;
-          n.left = n.right;
-          n.right = temp;
-          stack.push(n.left, n.right);
-      }
+    const n = stack.pop();
+    if (n !== null) {
+      let temp = n.left;
+      n.left = n.right;
+      n.right = temp;
+      stack.push(n.left, n.right);
+    }
   }
   return root;
 }
 
 // BFS
- var invertTree = function(root) {
+var invertTree = function (root) {
   const queue = [root];
-  
+
   while (queue.length) {
-      const node = queue.shift();
-      if (node) {
-          [node.left, node.right] = [node.right, node.left];
-          queue.push(node.left, node.right);
-      }
+    const node = queue.shift();
+    if (node) {
+      [node.left, node.right] = [node.right, node.left];
+      queue.push(node.left, node.right);
+    }
   }
   return root;
 }
