@@ -9,9 +9,21 @@
  * @param {ListNode} head
  * @return {boolean}
  */
-var isPalindrome = function (head) {
-    if (head === null || head.next === null) return true;
+function reverseList(head) {
+    let prev = null;
+    let next = null;
 
+    while (head !== null) {
+        next = head.next;
+        head.next = prev;
+
+        prev = head;
+        head = head.next;
+    }
+    return prev;
+}
+
+var isPalindrome = function (head) {
     let slow = head;
     let fast = head;
 
@@ -24,24 +36,10 @@ var isPalindrome = function (head) {
     slow = slow.next;
 
     while (slow !== null) {
-        if (head.val !== slow.val) return false;
+        if (slow.val !== head.val) return false;
 
-        head = head.next;
         slow = slow.next;
+        head = head.next;
     }
     return true;
 };
-
-function reverseList(head) {
-    let prev = null;
-    let next = null;
-
-    while (head !== null) {
-        next = head.next;
-        head.next = prev;
-
-        prev = head;
-        head = next;
-    }
-    return prev;
-}
