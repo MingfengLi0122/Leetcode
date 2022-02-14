@@ -24,6 +24,7 @@
       const right = dfs(node.right);
       
       diameter = Math.max(diameter, left + right);
+      
       return Math.max(left, right) + 1;
   }
 };
