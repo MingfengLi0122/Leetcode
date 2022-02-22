@@ -12,9 +12,8 @@
       let area = h * (right - left);
       
       if (area > res) res = area;
-      
-      if (height[left] < height[right]) left ++;
-      else right --;
+      if (height[left] < height[right]) left++;
+      else right--;
   }
   return res;
 };
