@@ -3,33 +3,32 @@
  * @return {number[][]}
  */
 var threeSum = function (nums) {
-  let res = [];
-  let target = 0;
-  nums = nums.sort((a, b) => a - b);
-
-  if (nums.length < 3) return res;
+  nums.sort((a, b) => a - b);
+  const result = [];
 
   for (let i = 0; i < nums.length; i++) {
     if (i > 0 && nums[i] === nums[i - 1]) continue;
+    const target = 0 - nums[i];
+    let left = i + 1;
+    let right = nums.length - 1;
 
-    let j = i + 1;
-    let k = nums.length - 1;
+    while (right > left) {
+      const sum = nums[left] + nums[right];
 
-    while (j < k) {
-      if (nums[i] + nums[j] + nums[k] < target) {
-        j++;
-        while (j < k && nums[j] === nums[j - 1]) j++;
-      } else if (nums[i] + nums[j] + nums[k] > target) {
-        k--;
-        while (j < k && nums[k] === nums[k + 1]) k--;
+      if (sum > target) {
+        right--;
+      } else if (sum < target) {
+        left++;
       } else {
-        res.push([nums[i], nums[j], nums[k]]);
-        j++;
-        k--;
-        while (j < k && nums[j] === nums[j - 1]) j++;
-        while (j < k && nums[k] === nums[k + 1]) k--;
+        result.push([nums[i], nums[left], nums[right]]);
+
+        while (nums[left] === nums[left + 1]) left++;
+        while (nums[right] === nums[right - 1]) right--;
+
+        left++;
+        right--;
       }
     }
   }
-  return res;
+  return result;
 };
