@@ -4,6 +4,7 @@
  */
 var letterCombinations = function (digits) {
   if (digits === null || digits.length === 0) return [];
+
   const map = {
     2: 'abc',
     3: 'def',
@@ -21,10 +22,12 @@ var letterCombinations = function (digits) {
       res.push(string);
       return;
     }
+
     for (let char of map[digits[index]]) {
       dfs(index + 1, string + char);
     }
   }
   dfs(0, '');
+
   return res;
 };
