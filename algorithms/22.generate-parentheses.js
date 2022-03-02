@@ -2,21 +2,18 @@
  * @param {number} n
  * @return {string[]}
  */
- var generateParenthesis = function(n) {
-  let res = [];
-  
-  backTrace(n, n, '', res);
-  
-  return res;
-};
+ var generateParenthesis = function (n) {
 
-function backTrace(left, right, string, res) {
-  if (left > right) return;
-  
-  if (left === 0 && right === 0) {
-      res.push(string);
+  const gen = (canOpen, currentString, canClose) => {
+      let all = [];
+      if (canOpen === 0 && canClose === 0) return [currentString];
+      if (canOpen > 0) {
+          all = [...all, ...gen(canOpen - 1, currentString + '(', canClose + 1)];
+      }
+      if (canClose > 0) {
+          all = [...all, ...gen(canOpen, currentString + ')', canClose - 1)];
+      }
+      return all;
   }
-  
-  if (left > 0) backTrace(left - 1, right, string + '(', res);
-  if (right > 0) backTrace(left, right - 1, string + ')', res);
-}
+  return gen(n, '', 0);
+};
